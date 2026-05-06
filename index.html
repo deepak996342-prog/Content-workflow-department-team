@@ -573,7 +573,7 @@ async function callAPI(id, topic, out, apiKey, model, onChunk, signal) {
 function App() {
   const [apiKey,    setApiKey]    = useState('');
   const [topic,     setTopic]     = useState('');
-  const [model,     setModel]     = useState('meta-llama/llama-3.1-8b-instruct:free');
+  const [model,     setModel]     = useState('mistralai/mistral-7b-instruct:free');
   const [statuses,  setStatuses]  = useState({});
   const [outputs,   setOutputs]   = useState({});
   const [isRunning, setIsRunning] = useState(false);
@@ -673,7 +673,7 @@ function App() {
           <div className="fl">Model</div>
           <select className="fi fi-sel" value={model}
             onChange={e => setModel(e.target.value)} disabled={isRunning}>
-            <option value="meta-llama/llama-3.1-8b-instruct:free">Llama 3.1 8B — Free</option>
+            <option value="mistralai/mistral-7b-instruct:free">Mistral 7B — Free</option>
           </select>
         </div>
 
