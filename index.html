@@ -458,7 +458,7 @@ function buildMsg(id, topic, out) {
   const map = {
     1: {
       sys: `You are the Marketing Research Team at a Gen Z content company. Niche: ${niche}. Be specific and concise.`,
-      usr: `Topic: "${topic}"\n\nGenerate exactly 10 specific viral reel ideas for Gen Z (18-27). Each entry:\n[N]. **TITLE** — one-sentence hook explaining why Gen Z cares\n\nFocus on outrage, confusion, or obsession in the niche.`
+      usr: `${topic.trim() ? `Topic: "${topic.trim()}"` : `No topic was specified. Choose the single most viral topic you can find right now within the niche, then proceed as if that were the given topic. State your chosen topic at the top of your response.`}\n\nGenerate exactly 10 specific viral reel ideas for Gen Z (18-27). Each entry:\n[N]. **TITLE** — one-sentence hook explaining why Gen Z cares\n\nFocus on outrage, confusion, or obsession in the niche.`
     },
     2: {
       sys: `You are the Trend Analysis Team scoring Gen Z short-form content virality.`,
@@ -506,7 +506,7 @@ function buildMsg(id, topic, out) {
     },
     13: {
       sys: `You are the Operations Team compiling the final CEO report. Be thorough and use clear section headers.`,
-      usr: `Compile the COMPLETE CEO FINAL REPORT.\n\n════════════ CEO FINAL REPORT ════════════\nDate: ${new Date().toISOString().split('T')[0]}\nTopic: ${topic}\n\n📌 EXECUTIVE SUMMARY\n[2 sentences: what it is + why it will perform]\n\n🎯 SECTION 1 — THE IDEA\n[approved idea, angle, Gen Z persona, emotion, pillar]\n\n📝 SECTION 2 — THE SCRIPT\n[full production-ready script, all 5 sections labeled]\n\n🪝 SECTION 3 — THE HOOK\n[winning hook text, score breakdown, 4 rejected alternatives]\n\n📦 SECTION 4 — PACKAGING\n[thumbnail, caption, frame 1, text overlays]\n\n🔎 SECTION 5 — SEO\n[primary/secondary/trending hashtags, keywords, audio hook]\n\n📅 SECTION 6 — POSTING PLAN\n[best days, times, warmup, series potential]\n\n📈 SECTION 7 — PERFORMANCE\n[3-scenario table, watch time %, viral probability, triggers, risks]\n\n💡 SECTION 8 — FEEDBACK\n[virality score, strongest elements, weakest + fixes]\n\n✅ SECTION 9 — RECOMMENDATION\n[APPROVE / APPROVE WITH EDITS / REVISE — with priority actions]\n═══════════════════════════════════════════\n\nBased on all department outputs:\n${[1,2,3,4,5,6,7,8,9,10,11,12].filter(i=>p(i)).map(i=>`[Dept ${i}]\n${p(i).slice(0,260)}`).join('\n\n')}`
+      usr: `Compile the COMPLETE CEO FINAL REPORT.\n\n════════════ CEO FINAL REPORT ════════════\nDate: ${new Date().toISOString().split('T')[0]}\nTopic: ${topic.trim() || '(AI-selected)'}\n\n📌 EXECUTIVE SUMMARY\n[2 sentences: what it is + why it will perform]\n\n🎯 SECTION 1 — THE IDEA\n[approved idea, angle, Gen Z persona, emotion, pillar]\n\n📝 SECTION 2 — THE SCRIPT\n[full production-ready script, all 5 sections labeled]\n\n🪝 SECTION 3 — THE HOOK\n[winning hook text, score breakdown, 4 rejected alternatives]\n\n📦 SECTION 4 — PACKAGING\n[thumbnail, caption, frame 1, text overlays]\n\n🔎 SECTION 5 — SEO\n[primary/secondary/trending hashtags, keywords, audio hook]\n\n📅 SECTION 6 — POSTING PLAN\n[best days, times, warmup, series potential]\n\n📈 SECTION 7 — PERFORMANCE\n[3-scenario table, watch time %, viral probability, triggers, risks]\n\n💡 SECTION 8 — FEEDBACK\n[virality score, strongest elements, weakest + fixes]\n\n✅ SECTION 9 — RECOMMENDATION\n[APPROVE / APPROVE WITH EDITS / REVISE — with priority actions]\n═══════════════════════════════════════════\n\nBased on all department outputs:\n${[1,2,3,4,5,6,7,8,9,10,11,12].filter(i=>p(i)).map(i=>`[Dept ${i}]\n${p(i).slice(0,260)}`).join('\n\n')}`
     }
   };
 
@@ -595,7 +595,6 @@ function App() {
 
   const run = useCallback(async () => {
     if (!apiKey.trim()) { setError('Enter your Anthropic API key.'); return; }
-    if (!topic.trim())  { setError('Enter a content topic.'); return; }
     setError(null);
     setStatuses({}); setOutputs({}); setDone(0); setActive(null);
     setIsRunning(true);
@@ -658,7 +657,7 @@ function App() {
         <div className="fg">
           <div className="fl">Content Topic</div>
           <input type="text" className="fi fi-topic"
-            placeholder="e.g. How to pay zero income tax legally"
+            placeholder="Optional — leave blank and AI picks the best topic"
             value={topic} onChange={e => setTopic(e.target.value)}
             disabled={isRunning}
             onKeyDown={e => e.key === 'Enter' && !isRunning && run()} />
