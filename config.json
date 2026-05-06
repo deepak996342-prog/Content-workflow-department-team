@@ -1,0 +1,73 @@
+{
+  "system": {
+    "name": "Content-Workflow-Department-Team",
+    "version": "1.0.0",
+    "description": "13-department AI content creation workflow system"
+  },
+  "niche": {
+    "primary": "personal finance",
+    "secondary": [
+      "AI with finance",
+      "AI for business and finance",
+      "taxation",
+      "business",
+      "business politics",
+      "financial literacy",
+      "corporate laws"
+    ],
+    "tone": "educational but casual, empowering, no fluff",
+    "content_format": "short-form video reel (60-90 seconds)"
+  },
+  "target_audience": {
+    "generation": "Gen Z",
+    "age_range": "18-27",
+    "platform_primary": "Instagram Reels",
+    "platform_secondary": ["TikTok", "YouTube Shorts"],
+    "pain_points": [
+      "broke but wants to build wealth",
+      "confused by financial systems not taught in school",
+      "wants to use AI tools to get ahead",
+      "skeptical of traditional finance advice",
+      "motivated by financial independence and early retirement"
+    ],
+    "aspirations": [
+      "financial freedom before 30",
+      "understanding tax systems to pay less legally",
+      "building passive income streams",
+      "starting a business without a degree"
+    ],
+    "language_style": {
+      "voice": "cool older sibling who figured it out",
+      "avoid": [
+        "jargon",
+        "corporate speak",
+        "condescension",
+        "boomer finance advice"
+      ],
+      "use": [
+        "relatable analogies",
+        "pop culture references",
+        "direct address (you/your)",
+        "punchy short sentences",
+        "occasional intentional slang"
+      ]
+    }
+  },
+  "virality_filters": {
+    "minimum_hook_strength": 8,
+    "minimum_relatability_score": 8,
+    "minimum_virality_potential": 7,
+    "scoring_scale": "1-10"
+  },
+  "script_format": {
+    "structure": ["Hook", "Build", "Re-hook", "Climax", "CTA"],
+    "hook_duration_seconds": 3,
+    "total_duration_seconds": 90,
+    "cta_style": "save this, share with a friend, comment your answer"
+  },
+  "output": {
+    "report_template": "templates/ceo-report.md",
+    "output_directory": "outputs/",
+    "file_naming": "YYYY-MM-DD-[idea-slug]-report.md"
+  }
+}
