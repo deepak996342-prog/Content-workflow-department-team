@@ -523,7 +523,8 @@ async function callAPI(id, topic, out, apiKey, model, onChunk, signal) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${apiKey}`,
+      'Authorization': 'Bearer ' + apiKey,
+      'HTTP-Referer': 'http://localhost',
     },
     body: JSON.stringify({
       model,
